@@ -23,11 +23,10 @@ Original activity: "${baseActivity}"
 
 Requirements:
 1. Must be the EXACT same type of activity - no changing the core concept
-2. Add creative details to the EXISTING activity only
-3. Make it more ambitious but achievable
-4. Keep all main elements from original activity
-5. STRICT 150 character limit - longer responses will be rejected
-6. Respond with ONLY the enhanced version
+2. Add more adult-oriented, spicier details to the EXISTING activity only
+3. Keep it tasteful but not explicit
+4. STRICT 150 character limit - longer responses will be rejected
+5. Respond with ONLY the enhanced version
 
 Example:
 Input: "Make a mosaic from broken tiles"
