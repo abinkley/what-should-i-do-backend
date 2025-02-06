@@ -17,7 +17,7 @@ app.post('/generate-activity', async (req, res) => {
         
         let prompt;
         if (isSpicier && baseActivity) {
-            prompt = `Make this activity more detailed and creative, but keep your response STRICTLY under 150 characters - no exceptions.
+            prompt = `Make this activity more detailed and creative, but keep your response STRICTLY under 100 characters - no exceptions.
 
 Original activity: "${baseActivity}"
 
@@ -25,16 +25,16 @@ Requirements:
 1. Must be the EXACT same type of activity - no changing the core concept
 2. Add more adult-oriented, spicier details to the EXISTING activity only
 3. Keep it tasteful but not explicit
-4. STRICT 150 character limit - longer responses will be rejected
+4. STRICT 100 character limit - longer responses will be rejected
 5. Respond with ONLY the enhanced version
 
 Example:
 Input: "Make a mosaic from broken tiles"
 Output: "Create a detailed mosaic using broken tiles in a gradient pattern, incorporating mirror pieces and metallic accents for a 3D effect"`;
         } else {
-            prompt = `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
+            prompt = `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 100 characters.
                      Respond with just the activity itself - no explanations or additional text.
-                     Example: "Create a miniature indoor zen garden with colored sand and tiny succulents"`;
+                     Example: "Create a miniature indoor zen garden with colored sand and tiny succulents" or "Go for a hike by a waterfall"`;
         }
 
         // Add timeout and retry logic
