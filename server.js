@@ -1,13 +1,15 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
 app.post('/generate-activity', async (req, res) => {
     try {
+        const isSpicier = req.body.spicier || false;
+        const baseActivity = req.body.activity || '';
+        
+        let prompt = isSpicier 
+            ? `Make this activity more exciting and adventurous, but keep it safe and appropriate: "${baseActivity}". 
+               Respond with just the spicier version - no explanations.`
+            : `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
+               Respond with just the activity itself - no explanations or additional text.
+               Example: "Create a miniature indoor zen garden with colored sand and tiny succulents"`;
+
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
@@ -20,9 +22,7 @@ app.post('/generate-activity', async (req, res) => {
                 max_tokens: 100,
                 messages: [{
                     role: "user",
-                    content: `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
-                    Respond with just the activity itself - no explanations or additional text.
-                    Example: "Create a miniature indoor zen garden with colored sand and tiny succulents"`
+                    content: prompt
                 }],
                 temperature: 0.9
             })
@@ -34,9 +34,4 @@ app.post('/generate-activity', async (req, res) => {
         console.error('Error:', error);
         res.status(500).json({ error: 'Failed to generate activity' });
     }
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
 });
