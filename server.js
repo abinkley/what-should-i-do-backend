@@ -17,7 +17,7 @@ app.post('/generate-activity', async (req, res) => {
         
         let prompt;
         if (isSpicier && baseActivity) {
-            prompt = `Enhance this specific activity by adding more detail and complexity while keeping the exact same type of activity and core concept. Do not create a new or different activity.
+            prompt = `Enhance this specific activity by adding more detail and complexity while keeping the exact same type of activity and core concept. Do not create a new or different activity. Your response MUST be 150 characters or less.
 
 Original activity: "${baseActivity}"
 
@@ -26,11 +26,12 @@ Requirements:
 2. Add more creative details and complexity to the EXISTING activity
 3. Make it more ambitious but achievable
 4. Keep all the main elements from the original activity
-5. Respond with ONLY the enhanced version, no explanations
+5. Response MUST be 150 characters or less - this is a strict requirement
+6. Respond with ONLY the enhanced version, no explanations
 
 For example:
 Input: "Paint a landscape"
-Output: "Paint a detailed sunset landscape using multiple layers, adding depth with foreground silhouettes and creating a glowing sky with blended colors and subtle cloud formations"`;
+Output: "Paint a layered sunset landscape with silhouetted trees, blended cloud formations, and shimmering reflections in a serene lake"`;
         } else {
             prompt = `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
                      Respond with just the activity itself - no explanations or additional text.
