@@ -3,12 +3,17 @@ app.post('/generate-activity', async (req, res) => {
         const isSpicier = req.body.spicier || false;
         const baseActivity = req.body.activity || '';
         
-        let prompt = isSpicier 
-            ? `Make this activity more exciting and adventurous, but keep it safe and appropriate: "${baseActivity}". 
-               Respond with just the spicier version - no explanations.`
-            : `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
-               Respond with just the activity itself - no explanations or additional text.
-               Example: "Create a miniature indoor zen garden with colored sand and tiny succulents"`;
+        let prompt;
+        if (isSpicier && baseActivity) {
+            prompt = `Make this activity more exciting, adventurous and creative (while keeping it safe): "${baseActivity}"
+                     Respond with just the spicier version - no explanations.
+                     Example: If the activity is "Build a sandcastle", a spicier version might be 
+                     "Build an elaborate sand fortress with a working moat, bridges, and decorated with seashells and driftwood."`;
+        } else {
+            prompt = `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
+                     Respond with just the activity itself - no explanations or additional text.
+                     Example: "Create a miniature indoor zen garden with colored sand and tiny succulents"`;
+        }
 
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
