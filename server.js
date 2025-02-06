@@ -17,21 +17,21 @@ app.post('/generate-activity', async (req, res) => {
         
         let prompt;
         if (isSpicier && baseActivity) {
-            prompt = `Enhance this specific activity by adding more detail and complexity while keeping the exact same type of activity and core concept. Do not create a new or different activity. Your response MUST be 150 characters or less.
+            prompt = `Make this activity more detailed and creative, but keep your response STRICTLY under 150 characters - no exceptions.
 
 Original activity: "${baseActivity}"
 
 Requirements:
-1. Must be the same type of activity (e.g. if it's about sculpting clay figures, the enhanced version must still be about sculpting clay figures)
-2. Add more creative details and complexity to the EXISTING activity
+1. Must be the EXACT same type of activity - no changing the core concept
+2. Add creative details to the EXISTING activity only
 3. Make it more ambitious but achievable
-4. Keep all the main elements from the original activity
-5. Response MUST be 150 characters or less - this is a strict requirement
-6. Respond with ONLY the enhanced version, no explanations
+4. Keep all main elements from original activity
+5. STRICT 150 character limit - longer responses will be rejected
+6. Respond with ONLY the enhanced version
 
-For example:
-Input: "Paint a landscape"
-Output: "Paint a layered sunset landscape with silhouetted trees, blended cloud formations, and shimmering reflections in a serene lake"`;
+Example:
+Input: "Make a mosaic from broken tiles"
+Output: "Create a detailed mosaic using broken tiles in a gradient pattern, incorporating mirror pieces and metallic accents for a 3D effect"`;
         } else {
             prompt = `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
                      Respond with just the activity itself - no explanations or additional text.
@@ -56,7 +56,7 @@ Output: "Paint a layered sunset landscape with silhouetted trees, blended cloud 
                     },
                     body: JSON.stringify({
                         model: "claude-3-opus-20240229",
-                        max_tokens: 100,
+                        max_tokens: 50,
                         messages: [{
                             role: "user",
                             content: prompt
@@ -73,12 +73,18 @@ Output: "Paint a layered sunset landscape with silhouetted trees, blended cloud 
                 }
 
                 const data = await response.json();
-                
-                if (!data.content || !data.content[0] || !data.content[0].text) {
-                    throw new Error('Invalid response format from API');
+                console.log('Raw API response:', JSON.stringify(data, null, 2));
+
+                // Extract the activity text from the response
+                const activityText = data.content[0].text.trim();
+                console.log('Activity being sent to client:', activityText);
+
+                // Verify the response is within length limit
+                if (activityText.length > 150) {
+                    throw new Error('Response exceeded character limit');
                 }
-                
-                return res.json({ activity: data.content[0].text });
+
+                return res.json({ activity: activityText });
 
             } catch (error) {
                 lastError = error;
