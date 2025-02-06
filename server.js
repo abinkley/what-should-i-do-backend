@@ -24,9 +24,8 @@ Original activity: "${baseActivity}"
 Requirements:
 1. Must be the EXACT same type of activity - no changing the core concept
 2. Add more adult-oriented, spicier details to the EXISTING activity only
-3. Keep it tasteful but not explicit
-4. STRICT 100 character limit - longer responses will be rejected
-5. Respond with ONLY the enhanced version
+3. STRICT 100 character limit - longer responses will be rejected
+4. Respond with ONLY the enhanced version
 
 Example:
 Input: "Go for a hike near a waterfall" 
