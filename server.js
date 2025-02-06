@@ -29,8 +29,8 @@ Requirements:
 5. Respond with ONLY the enhanced version
 
 Example:
-Input: "Make a mosaic from broken tiles"
-Output: "Create a detailed mosaic using broken tiles in a gradient pattern, incorporating mirror pieces and metallic accents for a 3D effect"`;
+Input: "Go for a hike near a waterfall" 
+Output: "Go for a stroll along a mossy path near a waterfall"`;
         } else {
             prompt = `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 100 characters.
                      Respond with just the activity itself - no explanations or additional text.
