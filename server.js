@@ -56,7 +56,7 @@ Output: "Paint a layered sunset landscape with silhouetted trees, blended cloud 
                     },
                     body: JSON.stringify({
                         model: "claude-3-opus-20240229",
-                        max_tokens: 50,
+                        max_tokens: 100,
                         messages: [{
                             role: "user",
                             content: prompt
