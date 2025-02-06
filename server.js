@@ -17,18 +17,20 @@ app.post('/generate-activity', async (req, res) => {
         
         let prompt;
         if (isSpicier && baseActivity) {
-            prompt = `Your task is to make the following activity more exciting and creative, while keeping the same core theme and concept. 
-                     Original activity: "${baseActivity}"
-                     
-                     Rules:
-                     1. Keep the same basic type of activity (if it's crafting, keep it crafting-related)
-                     2. Add more detail, complexity, or creative elements
-                     3. Make it more ambitious or challenging
-                     4. Keep it safe and achievable
-                     5. Respond with ONLY the enhanced version, no explanations
-                     
-                     Example Input: "Build a sandcastle"
-                     Example Output: "Build an elaborate sand fortress with a working moat, bridges, and decorated with seashells and driftwood"`;
+            prompt = `Enhance this specific activity by adding more detail and complexity while keeping the exact same type of activity and core concept. Do not create a new or different activity.
+
+Original activity: "${baseActivity}"
+
+Requirements:
+1. Must be the same type of activity (e.g. if it's about sculpting clay figures, the enhanced version must still be about sculpting clay figures)
+2. Add more creative details and complexity to the EXISTING activity
+3. Make it more ambitious but achievable
+4. Keep all the main elements from the original activity
+5. Respond with ONLY the enhanced version, no explanations
+
+For example:
+Input: "Paint a landscape"
+Output: "Paint a detailed sunset landscape using multiple layers, adding depth with foreground silhouettes and creating a glowing sky with blended colors and subtle cloud formations"`;
         } else {
             prompt = `Generate a unique and specific activity suggestion. Be creative and detailed, but keep it under 150 characters.
                      Respond with just the activity itself - no explanations or additional text.
